@@ -1,0 +1,17 @@
+
+apply plugin: 'eclipse'
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse-wtp'
+
+	version = '1.0'
+	group = 'org.gradletest'
+}
+
