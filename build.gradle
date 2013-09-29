@@ -1,3 +1,4 @@
+import WtpFix
 
 apply plugin: 'eclipse'
 
@@ -13,5 +14,16 @@ subprojects {
 
 	version = '1.0'
 	group = 'org.gradletest'
-}
 
+	project.afterEvaluate {
+		if (project.plugins.hasPlugin('war' )) {
+			eclipse.wtp.component.file.withXml {
+				WtpFix.customizeDeployment(project, it.asNode())
+			}
+		} else {
+			eclipse.classpath.file.withXml {
+				WtpFix.removeDeployment(it.asNode())
+			}
+		}
+	}
+}
